@@ -1,0 +1,18 @@
+{
+  "name": "employee-retirement-portal",
+  "version": "1.0.0",
+  "description": "Employee Retirement Portal & Jobify UI Application matching IEEE/ISO SRS specifications and modern UI design",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "retirement-portal",
+    "pension-management",
+    "srs",
+    "jobify-ui"
+  ],
+  "author": "@ragavi",
+  "license": "MIT"
+}

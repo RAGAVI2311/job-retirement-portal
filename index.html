@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobify & Employee Retirement Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Browser Shell Container (Matches Reference Screenshot Format) -->
+  <div class="browser-shell">
+    
+    <!-- Top Browser Bar with Window Controls & URL -->
+    <div class="browser-header">
+      <div class="browser-dots">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <div style="display: flex; gap: 8px; margin-left: 12px; color: #94a3b8;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="browser-url-bar" id="browserUrlBar">
+        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span id="browserUrlText">www.retirement-portal.gov/pension-lifecycle</span>
+      </div>
+      <div class="browser-tools">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      </div>
+    </div>
+
+    <!-- Application Top Navigation Bar -->
+    <header class="app-header">
+      <div class="brand-section" onclick="switchMode('retirement')">
+        <div class="brand-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div class="brand-title">Jobify<span>.</span></div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li><a class="nav-link" data-action="home">Home</a></li>
+          <li><a class="nav-link active" data-action="applications">Retirement Cases</a></li>
+          <li><a class="nav-link" data-action="new-app">+ Apply for Retirement</a></li>
+          <li><a class="nav-link" data-action="pensioner-hub">Pensioner Hub</a></li>
+          <li><a class="nav-link" data-action="forecast">Retirement Forecast</a></li>
+          <li><a class="nav-link" data-action="audit-logs">Audit Trail</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions (Dual Mode Switcher + RBAC User Switcher) -->
+      <div class="header-actions">
+        <!-- Mode Switcher -->
+        <div class="mode-toggle-group">
+          <button class="mode-btn active" id="btnModeRetirement" title="Employee Retirement Portal (Full SRS Implementation)">
+            🏛️ Retirement SRS
+          </button>
+          <button class="mode-btn" id="btnModeJobify" title="Jobify Job Portal (Exact Screenshot UI Mockup)">
+            💼 Jobify UI
+          </button>
+        </div>
+
+        <!-- User Profile Badge & RBAC Dropdown Switcher (SRS Section 2.2) -->
+        <div class="user-profile-badge" id="userProfileBadge" title="Click to switch role (FR-1 & Section 2.2)">
+          <div class="user-info-text">
+            <div class="user-name" id="headerUserName">Gausul Haque</div>
+            <div class="user-role-tag" id="headerUserRole">System Administrator</div>
+          </div>
+          <img class="user-avatar" id="headerUserAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" alt="Avatar">
+          <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- Role Switcher Dropdown (Allows testing all 8 SRS roles instantly) -->
+    <div class="role-dropdown-menu" id="roleDropdownMenu">
+      <div class="role-menu-header">Switch User Role (SRS Section 2.2)</div>
+      <div class="role-option" data-role="employee">👤 1. Employee (Robert Chen)</div>
+      <div class="role-option" data-role="reporting_officer">👔 2. Reporting Officer / HOD</div>
+      <div class="role-option" data-role="hr_officer">🛡️ 3. HR Scrutiny Officer</div>
+      <div class="role-option" data-role="nodal_officer">🏛️ 4. Department Nodal Officer</div>
+      <div class="role-option" data-role="accounts_officer">💰 5. Accounts / Finance Officer</div>
+      <div class="role-option" data-role="competent_authority">✍️ 6. Competent Authority (Director)</div>
+      <div class="role-option" data-role="pensioner">👴 7. Pensioner (Arthur Pendelton)</div>
+      <div class="role-option active" data-role="administrator">⚙️ 8. System Administrator</div>
+      <div class="role-option" data-role="auditor">🔍 9. Auditor (Read-Only)</div>
+    </div>
+
+    <!-- Main Container: 2-Column Layout (Sidebar Filter + Content Area) -->
+    <div class="main-layout">
+      
+      <!-- Left Filter Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title" id="sidebarTitle">Retirement Filters</div>
+          <button class="reset-btn" id="btnResetFilters">Reset</button>
+        </div>
+
+        <!-- Sort By Section -->
+        <div class="filter-group">
+          <div class="filter-group-title">Sort By</div>
+          <div class="checkbox-grid">
+            <label class="checkbox-item">
+              <input type="radio" name="sortByRadio" value="recently" checked> Recently
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="sortByRadio" value="az"> A-Z
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="sortByRadio" value="salary"> Top Salary
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="sortByRadio" value="rating"> Rating
+            </label>
+          </div>
+        </div>
+
+        <!-- Range Slider Section -->
+        <div class="filter-group">
+          <div class="filter-group-title" id="filterGroup2Title">Pension Range</div>
+          <div class="slider-container">
+            <input type="range" class="range-slider" min="30" max="250" value="120" id="salaryRangeSlider">
+            <div class="slider-labels">
+              <span>$50k/m</span>
+              <span id="sliderMaxLabel">$120k/m</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Type / Retirement Scheme Section -->
+        <div class="filter-group">
+          <div class="filter-group-title" id="filterGroup3Title">Retirement Scheme</div>
+          <div class="checkbox-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 8px;">
+            <label class="checkbox-item">
+              <input type="checkbox" id="jobTypeCb1" checked> <span id="jobTypeLabel1">Superannuation</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="jobTypeCb2"> <span id="jobTypeLabel2">Voluntary (VRS)</span>
+            </label>
+          </div>
+          <div class="checkbox-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 8px;">
+            <label class="checkbox-item">
+              <input type="checkbox" id="jobTypeCb3"> <span id="jobTypeLabel3">Premature</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="jobTypeCb4"> <span id="jobTypeLabel4">Medical Ground</span>
+            </label>
+          </div>
+          <label class="checkbox-item">
+            <input type="checkbox" id="jobTypeCb5"> <span id="jobTypeLabel5">Compulsory</span>
+          </label>
+        </div>
+
+        <!-- Work Location / Department Section -->
+        <div class="filter-group">
+          <div class="filter-group-title" id="filterGroup4Title">Department</div>
+          <div class="checkbox-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 8px;">
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="locationLabel1">IT & Systems</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="locationLabel2">Civil Engineering</span>
+            </label>
+          </div>
+          <label class="checkbox-item">
+            <input type="checkbox"> <span id="locationLabel3">Finance & Accounts</span>
+          </label>
+        </div>
+
+        <!-- Experience Level / Tenure Section -->
+        <div class="filter-group">
+          <div class="filter-group-title" id="filterGroup5Title">Service Tenure</div>
+          <div class="checkbox-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 8px;">
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="expLabel1">10 - 20 Years</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="expLabel2">20 - 30 Years</span>
+            </label>
+          </div>
+          <div class="checkbox-grid" style="grid-template-columns: 1fr 1fr;">
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="expLabel3">30+ Years</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox"> <span id="expLabel4">Sanctioned</span>
+            </label>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Right Content Area -->
+      <main class="content-area">
+        
+        <!-- Hero Search Section -->
+        <section class="hero-search-section">
+          <h1 class="hero-title" id="heroTitle">Employee Retirement & Pension Portal</h1>
+          <p class="hero-subtitle" id="heroSubtitle">
+            Manage superannuation, approvals, multi-departmental no-dues clearance, and statutory pension benefits.
+          </p>
+
+          <!-- Dual Input Search Bar (Matches Reference Screenshot) -->
+          <div class="search-box-bar">
+            <div class="search-input-col">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" id="mainSearchInput" placeholder="Search Employee Name, ID, or Designation...">
+            </div>
+            <div class="search-divider"></div>
+            <div class="search-input-col">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <input type="text" id="locationSearchInput" placeholder="Search Department or Office...">
+            </div>
+            <button class="btn-search" id="btnMainSearch">Search</button>
+          </div>
+        </section>
+
+        <!-- Results Header Bar -->
+        <div class="results-header-bar">
+          <div class="results-count">
+            Showing <strong id="resultsCountNumber">6</strong> <span id="resultsLabelText">active retirement applications</span>
+          </div>
+          <div class="sort-dropdown">
+            <span>Short By:</span>
+            <select class="sort-select" id="sortSelect">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="amount">Highest Amount</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cards Grid (3 Columns) -->
+        <div class="cards-grid" id="cardsGrid">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Reusable Modal Overlay for Retirement Case Details, Formulas, Sanctions & Job Details -->
+  <div class="modal-overlay" id="retirementModalOverlay">
+    <div class="modal-container" id="retirementModalContainer">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
